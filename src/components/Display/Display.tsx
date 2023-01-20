@@ -1,6 +1,10 @@
 import { Flex, Stack, Text } from '@chakra-ui/react';
+import { useAppSelector } from '../../hooks/redux';
+import { selectVMachine } from '../../store/selectors/vmachine.selector';
 
 export const Display = () => {
+  const { cashInTotal, cashOutTotal } = useAppSelector(selectVMachine);
+
   return (
     <Flex
       w="180px"
@@ -18,11 +22,11 @@ export const Display = () => {
     >
       <Stack spacing={0}>
         <Text fontWeight="bold">ВНЕСЕНО</Text>
-        <Text>0</Text>
+        <Text>{cashInTotal}</Text>
       </Stack>
       <Stack spacing={0}>
         <Text fontWeight="bold">ОСТАТОК</Text>
-        <Text>0</Text>
+        <Text>{cashOutTotal}</Text>
       </Stack>
     </Flex>
   );

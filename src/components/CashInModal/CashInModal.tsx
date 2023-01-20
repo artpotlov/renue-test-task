@@ -3,7 +3,6 @@ import {
   Flex,
   HStack,
   Image,
-  Input,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -16,16 +15,41 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import CoinImage from '../../assets/coin.png';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { selectCashIn } from '../../store/selectors/cashin.selector';
+import { selectWallet } from '../../store/selectors/wallet.selector';
+import { cashInActions } from '../../store/slices/cashin/cashin.slice';
+import { vMachineActions } from '../../store/slices/VMachine/vmachine.slice';
+import { walletActions } from '../../store/slices/wallet/wallet.slice';
+import { CashInControl } from '../CashInControl';
 
 export const CashInModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { wallet } = useAppSelector(selectWallet);
+  const { total, cashIn } = useAppSelector(selectCashIn);
+  const { clearAll } = cashInActions;
+  const { setCashIn } = vMachineActions;
+  const { subCashIn } = walletActions;
+  const dispatch = useAppDispatch();
+
+  const handleClose = () => {
+    dispatch(clearAll());
+    onClose();
+  };
+
+  const handleClick = () => {
+    dispatch(setCashIn({ total, cashIn }));
+    dispatch(subCashIn(cashIn));
+    dispatch(clearAll());
+  };
+
   return (
     <>
       <Button w="100%" colorScheme="linkedin" onClick={onOpen}>
         Внести монеты
       </Button>
 
-      <Modal isOpen={isOpen} onClose={onClose} size="2xl">
+      <Modal size="2xl" isOpen={isOpen} onClose={handleClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Внесение монет в аппарат</ModalHeader>
@@ -36,55 +60,25 @@ export const CashInModal = () => {
               <Stack spacing={4}>
                 <HStack spacing={8}>
                   <Stack spacing={8}>
-                    <Stack spacing={2}>
-                      <Text fontWeight="bold">Номинал 50</Text>
-                      <HStack spacing={2}>
-                        <Button>-</Button>
-                        <Input type="number" w="80px" placeholder="0" textAlign="center" />
-                        <Button>+</Button>
-                      </HStack>
-                      <Text fontSize="sm">Доступно: 0</Text>
-                    </Stack>
-                    <Stack spacing={2}>
-                      <Text fontWeight="bold">Номинал 100</Text>
-                      <HStack spacing={2}>
-                        <Button>-</Button>
-                        <Input type="number" w="80px" placeholder="0" textAlign="center" />
-                        <Button>+</Button>
-                      </HStack>
-                      <Text fontSize="sm">Доступно: 0</Text>
-                    </Stack>
+                    <CashInControl name='Номинал 50' par='50' balance={wallet[50]} />
+                    <CashInControl name='Номинал 100' par='100' balance={wallet[100]} />
                   </Stack>
                   <Stack spacing={8}>
-                    <Stack spacing={2}>
-                      <Text fontWeight="bold">Номинал 500</Text>
-                      <HStack spacing={2}>
-                        <Button>-</Button>
-                        <Input type="number" w="80px" placeholder="0" textAlign="center" />
-                        <Button>+</Button>
-                      </HStack>
-                      <Text fontSize="sm">Доступно: 0</Text>
-                    </Stack>
-                    <Stack spacing={2}>
-                      <Text fontWeight="bold">Номинал 1000</Text>
-                      <HStack spacing={2}>
-                        <Button>-</Button>
-                        <Input type="number" w="80px" placeholder="0" textAlign="center" />
-                        <Button>+</Button>
-                      </HStack>
-                      <Text fontSize="sm">Доступно: 0</Text>
-                    </Stack>
+                    <CashInControl name='Номинал 500' par='500' balance={wallet[500]} />
+                    <CashInControl name='Номинал 1000' par='1000' balance={wallet[1000]} />
                   </Stack>
                 </HStack>
                 <Text mr={4} fontSize="lg" fontWeight="bold">
-                  Итого будет внесено: 1000
+                  Итого будет внесено: {total}
                 </Text>
               </Stack>
             </Flex>
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="whatsapp">Внести</Button>
-            <Button ml={4} onClick={onClose}>
+            <Button colorScheme="whatsapp" onClick={handleClick}>
+              Внести
+            </Button>
+            <Button ml={4} onClick={handleClose}>
               Отмена
             </Button>
           </ModalFooter>
