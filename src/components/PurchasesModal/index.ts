@@ -1,1 +1,1 @@
-export { PurchsesModal } from './PurchasesModal';
+export { PurchasesModal } from './PurchasesModal';

@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { CatalogCard } from '../CatalogCard';
 
-export const PurchsesModal = () => {
+export const PurchasesModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>

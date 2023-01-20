@@ -2,7 +2,7 @@ import { Button, Flex, Image, Stack } from '@chakra-ui/react';
 import VendingLogo from '../../assets/vending_machine.svg';
 import { CashInModal } from '../CashInModal';
 import { Display } from '../Display';
-import { PurchsesModal } from '../PurchasesModal';
+import { PurchasesModal } from '../PurchasesModal';
 import { WalletModal } from '../WalletModal';
 
 export const SideBar = () => {
@@ -30,7 +30,7 @@ export const SideBar = () => {
       </Stack>
       <Image src={VendingLogo} w="100px" h="48px" />
       <Stack w="100%" spacing="15px">
-        <PurchsesModal />
+        <PurchasesModal />
         <WalletModal />
       </Stack>
     </Flex>
