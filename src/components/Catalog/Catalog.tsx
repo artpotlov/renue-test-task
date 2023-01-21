@@ -1,7 +1,10 @@
 import { Flex } from '@chakra-ui/react';
+import { useAppSelector } from '../../hooks/redux';
+import { selectVMachine } from '../../store/selectors/vmachine.selector';
 import { CatalogCard } from '../CatalogCard';
 
 export const Catalog = () => {
+  const { products } = useAppSelector(selectVMachine);
   return (
     <Flex
       w="960px"
@@ -13,8 +16,8 @@ export const Catalog = () => {
       p="35px"
       boxShadow="0px 0px 30px rgba(64, 163, 255, 0.1)"
     >
-      {new Array(8).fill(0).map((el, i) => (
-        <CatalogCard />
+      {products.map((product) => (
+        <CatalogCard key={product.id} product={product} />
       ))}
     </Flex>
   );

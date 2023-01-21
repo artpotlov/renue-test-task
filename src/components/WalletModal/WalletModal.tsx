@@ -13,9 +13,13 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import CoinImage from '../../assets/coin.png';
+import { useAppSelector } from '../../hooks/redux';
+import { selectWallet } from '../../store/selectors/wallet.selector';
 
 export const WalletModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { wallet } = useAppSelector(selectWallet);
+
   return (
     <>
       <Button w="100%" colorScheme="linkedin" onClick={onOpen}>
@@ -24,7 +28,7 @@ export const WalletModal = () => {
 
       <Modal isOpen={isOpen} onClose={onClose} size="2xl">
         <ModalOverlay />
-        <ModalContent p="15px">
+        <ModalContent pb="15px">
           <ModalHeader>Мой кошелёк</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
@@ -32,27 +36,27 @@ export const WalletModal = () => {
               <Image src={CoinImage} w="100px" h="100px" />
               <Stack spacing={2}>
                 <Text>
-                  <b>Номинал 1:</b> 100 монет
+                  <b>Номинал 1:</b> {wallet[1]} монет
                 </Text>
                 <Text>
-                  <b>Номинал 5:</b> 100 монет
+                  <b>Номинал 5:</b> {wallet[5]} монет
                 </Text>
                 <Text>
-                  <b>Номинал 10:</b> 100 монет
+                  <b>Номинал 10:</b> {wallet[10]} монет
                 </Text>
               </Stack>
               <Stack spacing={2}>
                 <Text>
-                  <b>Номинал 50:</b> 100 монет
+                  <b>Номинал 50:</b> {wallet[50]} монет
                 </Text>
                 <Text>
-                  <b>Номинал 100:</b> 100 монет
+                  <b>Номинал 100:</b> {wallet[100]} монет
                 </Text>
                 <Text>
-                  <b>Номинал 500:</b> 100 монет
+                  <b>Номинал 500:</b> {wallet[500]} монет
                 </Text>
                 <Text>
-                  <b>Номинал 1000:</b> 100 монет
+                  <b>Номинал 1000:</b> {wallet[1000]} монет
                 </Text>
               </Stack>
             </Flex>
