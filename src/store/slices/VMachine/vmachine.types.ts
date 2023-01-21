@@ -13,6 +13,5 @@ export type TVMachineCashInPayload = {
 };
 
 export type TVMachineBuyPayload = {
-  productID: number;
-  toastFn: (title: string, description: string) => void;
+  product: TCatalogProduct;
 };
