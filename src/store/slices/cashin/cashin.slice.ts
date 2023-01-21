@@ -18,7 +18,7 @@ const cashInSlice = createSlice({
     setCashIn: (state, action: PayloadAction<TCashInPayload>) => {
       state.cashIn[action.payload.par] = action.payload.count;
       state.total = Object.entries(state.cashIn).reduce(
-        (acc, cur) => (acc += Number(cur[0]) * cur[1]),
+        (acc, cur) => acc + Number(cur[0]) * cur[1],
         0,
       );
     },
