@@ -1,5 +1,5 @@
 import { Button, HStack, Input, Stack, Text } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { useAppDispatch } from '../../hooks/redux';
 import { cashInActions } from '../../store/slices/cashin/cashin.slice';
 
@@ -57,7 +57,7 @@ export const CashInControl = ({ name, par, balance }: TProps) => {
     }
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     checkCurrentCount(currentCount);
   }, [balance]);
 
