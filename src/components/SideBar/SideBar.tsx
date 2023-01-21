@@ -1,6 +1,7 @@
-import { Button, Flex, Image, Stack } from '@chakra-ui/react';
+import { Flex, Image, Stack } from '@chakra-ui/react';
 import VendingLogo from '../../assets/vending_machine.svg';
 import { CashInModal } from '../CashInModal';
+import { CashOutModal } from '../CashOutModal';
 import { Display } from '../Display';
 import { PurchasesModal } from '../PurchasesModal';
 import { WalletModal } from '../WalletModal';
@@ -24,9 +25,7 @@ export const SideBar = () => {
       <Stack spacing="15px">
         <Display />
         <CashInModal />
-        <Button w="100%" colorScheme="linkedin" isDisabled>
-          ЗАБРАТЬ СДАЧУ
-        </Button>
+        <CashOutModal />
       </Stack>
       <Image src={VendingLogo} w="100px" h="48px" />
       <Stack w="100%" spacing="15px">
