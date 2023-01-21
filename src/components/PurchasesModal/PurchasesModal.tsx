@@ -8,12 +8,25 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Text,
   useDisclosure,
 } from '@chakra-ui/react';
-import { CatalogCard } from '../CatalogCard';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { selectPurchases } from '../../store/slices/purchases/purchases.selector';
+import { purchasesActions } from '../../store/slices/purchases/purchases.slice';
+import { PurchaseCard } from '../PurchaseCard';
 
 export const PurchasesModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { products } = useAppSelector(selectPurchases);
+  const { clearPurchases } = purchasesActions;
+  const dispatch = useAppDispatch();
+
+  const handleClearBtn = () => {
+    dispatch(clearPurchases());
+    onClose();
+  };
+
   return (
     <>
       <Button w="100%" colorScheme="linkedin" onClick={onOpen}>
@@ -27,13 +40,17 @@ export const PurchasesModal = () => {
           <ModalCloseButton />
           <ModalBody>
             <Flex maxH="320px" flexWrap="wrap" gap="30px" overflow="auto">
-              {new Array(7).fill(0).map((el) => (
-                <CatalogCard />
-              ))}
+              {products.length === 0 ? (
+                <Text>Пока ничего не куплено</Text>
+              ) : (
+                products.map((product) => <PurchaseCard key={product.id} product={product} />)
+              )}
             </Flex>
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="red">Очистить</Button>
+            <Button colorScheme="red" onClick={handleClearBtn}>
+              Очистить
+            </Button>
             <Button ml={4} onClick={onClose}>
               Закрыть
             </Button>
