@@ -41,6 +41,8 @@ export const CashInModal = () => {
     dispatch(setCashIn({ total, cashIn }));
     dispatch(subCashIn(cashIn));
     dispatch(clearAll());
+
+    onClose();
   };
 
   return (
