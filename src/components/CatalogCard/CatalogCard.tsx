@@ -1,5 +1,6 @@
 import { Button, Flex, Image, Text, useToast } from '@chakra-ui/react';
-import { useAppDispatch } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { selectVMachine } from '../../store/selectors/vmachine.selector';
 import { vMachineActions } from '../../store/slices/VMachine/vmachine.slice';
 import { TCatalogProduct } from '../../types/types';
 
@@ -8,12 +9,40 @@ type TProps = {
 };
 
 export const CatalogCard = ({ product }: TProps) => {
-  const { id, image, name, volume, count, price } = product;
+  const { image, name, volume, count, price } = product;
   const toast = useToast();
+  const { products, cashOutTotal } = useAppSelector(selectVMachine);
   const { buy } = vMachineActions;
   const dispatch = useAppDispatch();
 
-  const callToast = (title: string, description: string) => toast({ title, description });
+  const handleClick = () => {
+    const stateProduct = products.find((p) => p.id === product.id);
+
+    if (cashOutTotal < product.price) {
+      toast({
+        title: 'Недостаточно средств',
+        description: 'Недостаточно средств для совершения покупки',
+        status: 'error',
+      });
+      return;
+    }
+
+    if (stateProduct && stateProduct.count === 0) {
+      toast({
+        title: 'Недостаточное количество',
+        description: `Недостаточное количество продукта ${product.name}`,
+        status: 'error',
+      });
+      return;
+    }
+
+    dispatch(buy(product));
+    toast({
+      title: 'Успешная покупка',
+      description: `Товар ${product.name} успешно приобретен`,
+      status: 'success',
+    });
+  };
 
   return (
     <Flex
@@ -21,9 +50,9 @@ export const CatalogCard = ({ product }: TProps) => {
       flexDirection="column"
       alignItems="center"
       p="15px"
-      bg="white"
+      bg={count <= 0 ? 'gray.100' : 'white'}
       border="1px"
-      borderColor="gray.300"
+      borderColor={count <= 0 ? 'gray.200' : 'gray.300'}
       borderRadius={20}
     >
       <Image
@@ -31,7 +60,11 @@ export const CatalogCard = ({ product }: TProps) => {
         h="100px"
         src={image}
         alt={name}
-        filter="drop-shadow(0px 3px 15px rgba(0, 0, 0, 0.25));"
+        filter={
+          count <= 0
+            ? 'drop-shadow(0px 3px 15px rgba(0, 0, 0, 0.25)) grayscale(100%)'
+            : 'drop-shadow(0px 3px 15px rgba(0, 0, 0, 0.25))'
+        }
       />
       <Text fontSize="20px" lineHeight="23px" fontWeight="bold" mt="10px" textAlign="center">
         {name}
@@ -48,15 +81,16 @@ export const CatalogCard = ({ product }: TProps) => {
         </Text>
       </Flex>
       <Button
-        colorScheme="whatsapp"
+        colorScheme={count <= 0 ? 'red' : 'whatsapp'}
         size="sm"
         borderRadius="10px"
         w="100%"
         h="30px"
         mt="10px"
-        onClick={() => dispatch(buy({ productID: id, toastFn: callToast }))}
+        isDisabled={count <= 0}
+        onClick={handleClick}
       >
-        Купить за {price}
+        {count <= 0 ? 'Покупка невозможна' : `Купить за ${price}`}
       </Button>
     </Flex>
   );
