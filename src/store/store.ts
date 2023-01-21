@@ -1,5 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { cashInReducer } from './slices/cashin/cashin.slice';
+import { cashoutReducer } from './slices/cashout/cashout.slice';
+import { purchasesReducer } from './slices/purchases/purchases.slice';
 import { vMachineReducer } from './slices/VMachine/vmachine.slice';
 import { walletReducer } from './slices/wallet/wallet.slice';
 
@@ -8,6 +10,8 @@ export const store = configureStore({
     vMachine: vMachineReducer,
     wallet: walletReducer,
     cashIn: cashInReducer,
+    cashOut: cashoutReducer,
+    purchases: purchasesReducer,
   },
 });
 
