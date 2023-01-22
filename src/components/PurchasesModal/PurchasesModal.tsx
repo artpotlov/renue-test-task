@@ -22,7 +22,7 @@ export const PurchasesModal = () => {
   const { clearPurchases } = purchasesActions;
   const dispatch = useAppDispatch();
 
-  const handleClearBtn = () => {
+  const handleClearBtnClick = () => {
     dispatch(clearPurchases());
     onClose();
   };
@@ -33,30 +33,36 @@ export const PurchasesModal = () => {
         Мои покупки
       </Button>
 
-      <Modal isOpen={isOpen} onClose={onClose} size="5xl">
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Мои покупки</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Flex maxH="320px" flexWrap="wrap" gap="30px" overflow="auto">
-              {products.length === 0 ? (
-                <Text>Пока ничего не куплено</Text>
-              ) : (
-                products.map((product) => <PurchaseCard key={product.id} product={product} />)
+      {isOpen && (
+        <Modal isOpen={isOpen} onClose={onClose} size={products.length > 0 ? '5xl' : '2xl'}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Мои покупки</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Flex maxH="320px" flexWrap="wrap" gap="30px" overflow="auto">
+                {products.length === 0 ? (
+                  <Text fontSize="lg" color="gray.500">
+                    Пока ничего не куплено
+                  </Text>
+                ) : (
+                  products.map((product) => <PurchaseCard key={product.id} product={product} />)
+                )}
+              </Flex>
+            </ModalBody>
+            <ModalFooter>
+              {products.length > 0 && (
+                <Button colorScheme="red" onClick={handleClearBtnClick}>
+                  Очистить
+                </Button>
               )}
-            </Flex>
-          </ModalBody>
-          <ModalFooter>
-            <Button colorScheme="red" onClick={handleClearBtn}>
-              Очистить
-            </Button>
-            <Button ml={4} onClick={onClose}>
-              Закрыть
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+              <Button ml={4} onClick={onClose}>
+                Закрыть
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      )}
     </>
   );
 };

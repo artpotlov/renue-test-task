@@ -11,10 +11,7 @@ export const SideBar = () => {
     <Flex
       w="210px"
       h="600px"
-      pt="35"
-      pb="35"
-      pl="15px"
-      pr="15px"
+      p="35px 15px"
       flexDirection="column"
       justifyContent="space-between"
       alignItems="center"
@@ -22,13 +19,13 @@ export const SideBar = () => {
       borderRadius="20px"
       boxShadow="0px 0px 30px rgba(64, 163, 255, 0.1)"
     >
-      <Stack spacing="15px">
+      <Stack spacing={4}>
         <Display />
         <CashInModal />
         <CashOutModal />
       </Stack>
-      <Image src={VendingLogo} w="100px" h="48px" />
-      <Stack w="100%" spacing="15px">
+      <Image src={VendingLogo} w="100px" h="50px" />
+      <Stack w="100%" spacing={4}>
         <PurchasesModal />
         <WalletModal />
       </Stack>

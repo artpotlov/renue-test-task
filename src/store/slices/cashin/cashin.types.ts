@@ -2,7 +2,7 @@ import { TCashIn } from '../../../types/types';
 
 export type TCashInState = {
   total: number;
-  cashIn: TCashIn;
+  cashInMoney: TCashIn;
 };
 
 export type TCashInPayload = {

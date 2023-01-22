@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { vMachineActions } from '../VMachine/vmachine.slice';
 import { TPurchsesState } from './purchses.types';
+import { vMachineActions } from '../vmachine/vmachine.slice';
 
 const initialState: TPurchsesState = {
   products: [],

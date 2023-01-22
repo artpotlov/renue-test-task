@@ -4,15 +4,15 @@ import { selectCashOut } from '../../store/slices/cashout/cashout.selector';
 import { PurchaseCard } from '../PurchaseCard';
 
 export const CashOutProducts = () => {
-  const { total, cProducts } = useAppSelector(selectCashOut);
-  const isInStock = cProducts.length > 0;
+  const { total, restProducts } = useAppSelector(selectCashOut);
+  const isInStock = restProducts.length > 0;
   return isInStock ? (
     <>
       <Text fontWeight="bold" mb={4}>
         В качестве сдачи будут выданы следующие товары
       </Text>
       <Flex maxH="320px" flexWrap="wrap" gap="30px" overflow="auto">
-        {cProducts.map((product) => (
+        {restProducts.map((product) => (
           <PurchaseCard key={product.id} product={product} />
         ))}
       </Flex>

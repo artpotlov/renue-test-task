@@ -3,7 +3,7 @@ import { TCashInPayload, TCashInState } from './cashin.types';
 
 const initialState: TCashInState = {
   total: 0,
-  cashIn: {
+  cashInMoney: {
     '50': 0,
     '100': 0,
     '500': 0,
@@ -16,15 +16,15 @@ const cashInSlice = createSlice({
   initialState,
   reducers: {
     setCashIn: (state, action: PayloadAction<TCashInPayload>) => {
-      state.cashIn[action.payload.par] = action.payload.count;
-      state.total = Object.entries(state.cashIn).reduce(
+      state.cashInMoney[action.payload.par] = action.payload.count;
+      state.total = Object.entries(state.cashInMoney).reduce(
         (acc, cur) => acc + Number(cur[0]) * cur[1],
         0,
       );
     },
     clearAll: (state) => {
       state.total = 0;
-      state.cashIn = {
+      state.cashInMoney = {
         '50': 0,
         '100': 0,
         '500': 0,

@@ -1,7 +1,7 @@
 import { TCashOut } from '../types/types';
 
 export const getChange = (total: number, balance: TCashOut) => {
-  const tempBalance = { ...balance };
+  const tempBalance = structuredClone(balance);
   const resultCashOut: TCashOut = {
     500: 0,
     100: 0,
