@@ -1,0 +1,68 @@
+import { TCatalogProduct } from '../../../../types/types';
+
+export const productsMock: TCatalogProduct[] = [
+  {
+    id: 100,
+    image: '/assets/products/aquanika.png',
+    name: 'Aquanika',
+    volume: '0.5 л',
+    count: 0,
+    price: 70,
+  },
+  {
+    id: 101,
+    image: '/assets/products/cola.png',
+    name: 'Cola',
+    volume: '330 мл',
+    count: 5,
+    price: 110,
+  },
+  {
+    id: 102,
+    image: '/assets/products/fanta.png',
+    name: 'Fanta Lemon',
+    volume: '330 мл',
+    count: 3,
+    price: 100,
+  },
+  {
+    id: 103,
+    image: '/assets/products/pepsi.png',
+    name: 'Pepsi',
+    volume: '330 мл',
+    count: 1,
+    price: 78,
+  },
+  {
+    id: 104,
+    image: '/assets/products/mandms.png',
+    name: "M&M's",
+    volume: '95 г',
+    count: 20,
+    price: 56,
+  },
+  {
+    id: 105,
+    image: '/assets/products/marsmax.png',
+    name: 'Mars Max',
+    volume: '80 г',
+    count: 15,
+    price: 80,
+  },
+  {
+    id: 106,
+    image: '/assets/products/nuts.png',
+    name: 'Nuts',
+    volume: '33 г',
+    count: 10,
+    price: 100,
+  },
+  {
+    id: 107,
+    image: '/assets/products/snikers.png',
+    name: 'Snikers',
+    volume: '45 г',
+    count: 3,
+    price: 115,
+  },
+];
