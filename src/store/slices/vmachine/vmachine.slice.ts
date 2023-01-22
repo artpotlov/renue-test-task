@@ -28,6 +28,10 @@ const VMachineSlice = createSlice({
       const index = state.products.findIndex((p) => p.id === product.id);
       state.products[index].count -= 1;
       state.cashOutTotal -= product.price;
+
+      if (state.cashOutTotal === 0) {
+        state.cashInTotal = 0;
+      }
     },
     subBalance: (state, action: PayloadAction<TCashOut>) => {
       state.cashInTotal = 0;

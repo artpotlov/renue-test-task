@@ -34,6 +34,13 @@ export const CashInControl = ({ name, par, balance }: TProps) => {
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = Number(e.target.value);
+
+    if (isNaN(value)) {
+      checkCurrentCount(balance);
+      return;
+    }
+
     checkCurrentCount(Number(e.target.value));
   };
 
