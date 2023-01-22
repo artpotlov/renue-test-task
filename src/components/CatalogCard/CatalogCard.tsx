@@ -16,6 +16,8 @@ export const CatalogCard = ({ product }: TProps) => {
   const toast = useToast();
 
   const handleBuyBtnClick = () => {
+    toast.closeAll();
+
     const stateProduct = products.find((p) => p.id === product.id);
 
     if (cashOutTotal < product.price) {
