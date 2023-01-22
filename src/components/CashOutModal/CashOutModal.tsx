@@ -11,22 +11,22 @@ import {
 } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { selectVMachine } from '../../store/selectors/vmachine.selector';
 import { selectCashOut } from '../../store/slices/cashout/cashout.selector';
 import { cashOutActions } from '../../store/slices/cashout/cashout.slice';
-import { vMachineActions } from '../../store/slices/VMachine/vmachine.slice';
+import { vMachineActions } from '../../store/slices/vmachine/vmachine.slice';
 import { walletActions } from '../../store/slices/wallet/wallet.slice';
 import { getChange } from '../../utils/getChange';
 import { getChangeProduct } from '../../utils/getChangeProduct';
 import { CashOutMoney } from '../CashOutMoney';
 import { CashOutProducts } from '../CashOutProducts';
+import { selectVMachine } from '../../store/slices/vmachine/vmachine.selector';
 
 export const CashOutModal = () => {
-  const { cashOutTotal, balance, products } = useAppSelector(selectVMachine);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { status, money, cProducts } = useAppSelector(selectCashOut);
+  const { cashOutTotal, balance, products } = useAppSelector(selectVMachine);
+  const { status, restMoney, restProducts } = useAppSelector(selectCashOut);
   const { subBalance, subProducts, clearCashInOut } = vMachineActions;
-  const { addCashOut } = walletActions;
+  const { addFromCashOut } = walletActions;
   const { setChangeMoney, setChangeProduct, clearAll } = cashOutActions;
   const dispatch = useAppDispatch();
 
@@ -37,18 +37,18 @@ export const CashOutModal = () => {
 
   const handleClick = () => {
     if (status === 'money') {
-      dispatch(subBalance(money));
-      dispatch(addCashOut(money));
+      dispatch(subBalance(restMoney));
+      dispatch(addFromCashOut(restMoney));
     }
 
     if (status === 'products') {
-      if (cProducts.length === 0) {
+      if (restProducts.length === 0) {
         dispatch(clearCashInOut());
         onClose();
         return;
       }
 
-      dispatch(subProducts(cProducts));
+      dispatch(subProducts(restProducts));
     }
 
     onClose();
@@ -78,34 +78,31 @@ export const CashOutModal = () => {
 
   return (
     <>
-      <Button
-        w="100%"
-        colorScheme="linkedin"
-        isDisabled={cashOutTotal <= 0}
-        onClick={onOpen}
-      >
+      <Button w="100%" colorScheme="linkedin" isDisabled={cashOutTotal <= 0} onClick={onOpen}>
         Забрать сдачу
       </Button>
 
-      <Modal isOpen={isOpen} onClose={handleClose} size={status === 'money' ? '2xl' : '5xl'}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Выдача сдачи</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            {status === 'money' && <CashOutMoney />}
-            {status === 'products' && <CashOutProducts />}
-          </ModalBody>
-          <ModalFooter>
-            <Button colorScheme="whatsapp" onClick={handleClick}>
-              {status === 'products' && cProducts.length === 0 ? 'ОК' : 'Забрать'}
-            </Button>
-            <Button ml={4} onClick={handleClose}>
-              Отмена
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      {isOpen && (
+        <Modal isOpen={isOpen} onClose={handleClose} size={status === 'money' ? '2xl' : '5xl'}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Выдача сдачи</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              {status === 'money' && <CashOutMoney />}
+              {status === 'products' && <CashOutProducts />}
+            </ModalBody>
+            <ModalFooter>
+              <Button colorScheme="whatsapp" onClick={handleClick}>
+                {status === 'products' && restProducts.length === 0 ? 'ОК' : 'Забрать'}
+              </Button>
+              <Button ml={4} onClick={handleClose}>
+                Отмена
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      )}
     </>
   );
 };

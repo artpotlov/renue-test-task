@@ -4,7 +4,7 @@ import { TCashOutMoneyPayload, TCashOutProductPayload, TCashOutState } from './c
 const initialState: TCashOutState = {
   status: null,
   total: 0,
-  money: {
+  restMoney: {
     '1': 0,
     '5': 0,
     '10': 0,
@@ -12,7 +12,7 @@ const initialState: TCashOutState = {
     '100': 0,
     '500': 0,
   },
-  cProducts: [],
+  restProducts: [],
 };
 
 const cashOutSlice = createSlice({
@@ -21,16 +21,16 @@ const cashOutSlice = createSlice({
   reducers: {
     setChangeMoney: (state, action: PayloadAction<TCashOutMoneyPayload>) => {
       state.status = 'money';
-      state.money = action.payload.cashOutMoney;
+      state.restMoney = action.payload.cashOutMoney;
     },
     setChangeProduct: (state, action: PayloadAction<TCashOutProductPayload>) => {
       state.status = 'products';
-      state.cProducts = action.payload.cashOutProducts;
+      state.restProducts = action.payload.cashOutProducts;
       state.total = action.payload.total;
     },
     clearAll: (state) => {
       state.status = null;
-      state.money = {
+      state.restMoney = {
         '1': 0,
         '5': 0,
         '10': 0,
@@ -39,10 +39,10 @@ const cashOutSlice = createSlice({
         '500': 0,
       };
       state.total = 0;
-      state.cProducts.length = 0;
+      state.restProducts.length = 0;
     },
   },
 });
 
 export const cashOutActions = cashOutSlice.actions;
-export const cashoutReducer = cashOutSlice.reducer;
+export const cashOutReducer = cashOutSlice.reducer;

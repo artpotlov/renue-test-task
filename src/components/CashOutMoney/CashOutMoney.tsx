@@ -1,11 +1,11 @@
 import { Box, Flex, Image, Stack, Text } from '@chakra-ui/react';
 import CoinImage from '../../assets/coin.png';
 import { useAppSelector } from '../../hooks/redux';
-import { selectVMachine } from '../../store/selectors/vmachine.selector';
 import { selectCashOut } from '../../store/slices/cashout/cashout.selector';
+import { selectVMachine } from '../../store/slices/vmachine/vmachine.selector';
 
 export const CashOutMoney = () => {
-  const { money } = useAppSelector(selectCashOut);
+  const { restMoney } = useAppSelector(selectCashOut);
   const { cashOutTotal } = useAppSelector(selectVMachine);
 
   return (
@@ -15,7 +15,7 @@ export const CashOutMoney = () => {
         <Stack spacing={4}>
           <Text fontWeight="bold">Будут выданы следующие монеты:</Text>
           <Box>
-            {Object.entries(money).map((el) => (
+            {Object.entries(restMoney).map((el) => (
               <Text key={el[0]} mb={2}>
                 <b>Номинал {el[0]}</b> - {el[1]} монет
               </Text>

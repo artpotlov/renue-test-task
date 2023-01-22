@@ -1,10 +1,11 @@
 import { Flex } from '@chakra-ui/react';
 import { useAppSelector } from '../../hooks/redux';
-import { selectVMachine } from '../../store/selectors/vmachine.selector';
 import { CatalogCard } from '../CatalogCard';
+import { selectVMachine } from '../../store/slices/vmachine/vmachine.selector';
 
 export const Catalog = () => {
   const { products } = useAppSelector(selectVMachine);
+
   return (
     <Flex
       w="960px"
