@@ -1,4 +1,4 @@
-import { TCashIn } from '../../../types/types';
+import { TCashIn } from '../../types/types';
 
 export type TCashInState = {
   total: number;

@@ -1,4 +1,4 @@
-import { TCatalogProduct } from '../../../../types/types';
+import { TCatalogProduct } from '../../../types/types';
 
 export const productsMock: TCatalogProduct[] = [
   {

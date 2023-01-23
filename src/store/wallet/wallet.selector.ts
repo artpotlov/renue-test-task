@@ -1,3 +1,3 @@
-import { TRootState } from '../../store';
+import { TRootState } from '../store';
 
 export const selectWallet = (state: TRootState) => state.wallet;

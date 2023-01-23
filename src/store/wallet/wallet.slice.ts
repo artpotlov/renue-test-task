@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TCashIn, TCashOut } from '../../../types/types';
+import { TCashIn, TCashOut } from '../../types/types';
 import { walletMock } from './__mock__/wallet.mock';
 import { TWalletState } from './wallet.types';
 
