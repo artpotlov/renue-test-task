@@ -6,6 +6,6 @@ export type TCashInState = {
 };
 
 export type TCashInPayload = {
-  par: '50' | '100' | '500' | '1000';
+  par: keyof TCashIn;
   count: number;
 };
