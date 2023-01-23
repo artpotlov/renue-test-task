@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TCashOut, TCatalogProduct } from '../../../types/types';
+import { TCashOut, TCatalogProduct } from '../../types/types';
 import { TVMachineCashInPayload, TVMachineState } from './vmachine.types';
 import { balanceMock } from './__mock__/balance.mock';
 import { productsMock } from './__mock__/products.mock';

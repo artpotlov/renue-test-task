@@ -11,15 +11,15 @@ import {
 } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { selectCashOut } from '../../store/slices/cashout/cashout.selector';
-import { cashOutActions } from '../../store/slices/cashout/cashout.slice';
-import { vMachineActions } from '../../store/slices/vmachine/vmachine.slice';
-import { walletActions } from '../../store/slices/wallet/wallet.slice';
+import { selectCashOut } from '../../store/cashout/cashout.selector';
+import { cashOutActions } from '../../store/cashout/cashout.slice';
+import { selectVMachine } from '../../store/vmachine/vmachine.selector';
+import { vMachineActions } from '../../store/vmachine/vmachine.slice';
+import { walletActions } from '../../store/wallet/wallet.slice';
 import { getChange } from '../../utils/getChange';
 import { getChangeProduct } from '../../utils/getChangeProduct';
 import { CashOutMoney } from '../CashOutMoney';
 import { CashOutProducts } from '../CashOutProducts';
-import { selectVMachine } from '../../store/slices/vmachine/vmachine.selector';
 
 export const CashOutModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -74,7 +74,7 @@ export const CashOutModal = () => {
         cashOutProducts: changeProducts.cashOutProducts,
       }),
     );
-  }, [isOpen]);
+  }, [isOpen, products, cashOutTotal, setChangeMoney, setChangeProduct, dispatch, balance]);
 
   return (
     <>

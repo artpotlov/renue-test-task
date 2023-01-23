@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { cashInReducer } from './slices/cashin/cashin.slice';
-import { cashOutReducer } from './slices/cashout/cashout.slice';
-import { purchasesReducer } from './slices/purchases/purchases.slice';
-import { vMachineReducer } from './slices/vmachine/vmachine.slice';
-import { walletReducer } from './slices/wallet/wallet.slice';
+import { cashInReducer } from './cashin/cashin.slice';
+import { cashOutReducer } from './cashout/cashout.slice';
+import { purchasesReducer } from './purchases/purchases.slice';
+import { vMachineReducer } from './vmachine/vmachine.slice';
+import { walletReducer } from './wallet/wallet.slice';
 
 export const store = configureStore({
   reducer: {

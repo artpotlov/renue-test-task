@@ -1,4 +1,4 @@
-import { TMoney } from '../../../../types/types';
+import { TMoney } from '../../../types/types';
 
 export const walletMock: TMoney = {
   '1': 0,

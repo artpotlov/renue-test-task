@@ -1,6 +1,6 @@
 import { Box, Flex, Text } from '@chakra-ui/react';
 import { useAppSelector } from '../../hooks/redux';
-import { selectVMachine } from '../../store/slices/vmachine/vmachine.selector';
+import { selectVMachine } from '../../store/vmachine/vmachine.selector';
 
 export const Display = () => {
   const { cashInTotal, cashOutTotal } = useAppSelector(selectVMachine);

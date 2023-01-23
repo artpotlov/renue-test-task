@@ -1,6 +1,6 @@
 import { Flex, Text } from '@chakra-ui/react';
 import { useAppSelector } from '../../hooks/redux';
-import { selectCashOut } from '../../store/slices/cashout/cashout.selector';
+import { selectCashOut } from '../../store/cashout/cashout.selector';
 import { PurchaseCard } from '../PurchaseCard';
 
 export const CashOutProducts = () => {
