@@ -20,7 +20,6 @@ import { getChange } from '../../utils/getChange';
 import { getChangeProduct } from '../../utils/getChangeProduct';
 import { CashOutMoney } from '../CashOutMoney';
 import { CashOutProducts } from '../CashOutProducts';
-import { selectVMachine } from '../../store/slices/vmachine/vmachine.selector';
 
 export const CashOutModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -75,7 +74,7 @@ export const CashOutModal = () => {
         cashOutProducts: changeProducts.cashOutProducts,
       }),
     );
-  }, [isOpen]);
+  }, [isOpen, products, cashOutTotal, setChangeMoney, setChangeProduct, dispatch, balance]);
 
   return (
     <>
