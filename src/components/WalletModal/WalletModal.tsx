@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react';
 import CoinImage from '../../assets/coin.png';
 import { useAppSelector } from '../../hooks/redux';
-import { selectWallet } from '../../store/slices/wallet/wallet.selector';
+import { selectWallet } from '../../store/wallet/wallet.selector';
 
 export const WalletModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

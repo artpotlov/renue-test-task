@@ -12,8 +12,8 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { selectPurchases } from '../../store/slices/purchases/purchases.selector';
-import { purchasesActions } from '../../store/slices/purchases/purchases.slice';
+import { selectPurchases } from '../../store/purchases/purchases.selector';
+import { purchasesActions } from '../../store/purchases/purchases.slice';
 import { PurchaseCard } from '../PurchaseCard';
 
 export const PurchasesModal = () => {

@@ -16,11 +16,11 @@ import {
 } from '@chakra-ui/react';
 import CoinImage from '../../assets/coin.png';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { selectCashIn } from '../../store/slices/cashin/cashin.selector';
-import { selectWallet } from '../../store/slices/wallet/wallet.selector';
-import { cashInActions } from '../../store/slices/cashin/cashin.slice';
-import { vMachineActions } from '../../store/slices/vmachine/vmachine.slice';
-import { walletActions } from '../../store/slices/wallet/wallet.slice';
+import { selectCashIn } from '../../store/cashin/cashin.selector';
+import { cashInActions } from '../../store/cashin/cashin.slice';
+import { vMachineActions } from '../../store/vmachine/vmachine.slice';
+import { selectWallet } from '../../store/wallet/wallet.selector';
+import { walletActions } from '../../store/wallet/wallet.slice';
 import { CashInControl } from '../CashInControl';
 
 export const CashInModal = () => {

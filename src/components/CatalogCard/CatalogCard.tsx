@@ -1,8 +1,8 @@
 import { Button, Flex, Image, Text, useToast } from '@chakra-ui/react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { vMachineActions } from '../../store/slices/vmachine/vmachine.slice';
+import { selectVMachine } from '../../store/vmachine/vmachine.selector';
+import { vMachineActions } from '../../store/vmachine/vmachine.slice';
 import { TCatalogProduct } from '../../types/types';
-import { selectVMachine } from '../../store/slices/vmachine/vmachine.selector';
 
 type TProps = {
   product: TCatalogProduct;

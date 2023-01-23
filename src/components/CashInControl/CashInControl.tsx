@@ -1,8 +1,9 @@
 import { Button, HStack, Input, Stack, Text } from '@chakra-ui/react';
 import React, { useLayoutEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { cashInActions } from '../../store/slices/cashin/cashin.slice';
-import { selectCashIn } from '../../store/slices/cashin/cashin.selector';
+import { selectCashIn } from '../../store/cashin/cashin.selector';
+import { cashInActions } from '../../store/cashin/cashin.slice';
+import { TCashIn } from '../../types/types';
 
 type TProps = {
   name: string;
