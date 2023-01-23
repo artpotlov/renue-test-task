@@ -1,5 +1,5 @@
 import { Button, HStack, Input, Stack, Text } from '@chakra-ui/react';
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { selectCashIn } from '../../store/cashin/cashin.selector';
 import { cashInActions } from '../../store/cashin/cashin.slice';
@@ -7,30 +7,30 @@ import { TCashIn } from '../../types/types';
 
 type TProps = {
   name: string;
-  par: '50' | '100' | '500' | '1000';
-  balance: number;
+  par: keyof TCashIn;
+  walletBalance: number;
 };
 
-export const CashInControl = ({ name, par, balance }: TProps) => {
-  const [currentBalance, setCurrentBalance] = useState(balance);
+export const CashInControl = ({ name, par, walletBalance }: TProps) => {
+  const [currentWalletBalance, setCurrentWalletBalance] = useState(walletBalance);
   const { cashInMoney } = useAppSelector(selectCashIn);
   const { setCashIn } = cashInActions;
   const dispatch = useAppDispatch();
 
   const checkCurrentCount = (value: number) => {
-    if (value > balance) {
-      setCurrentBalance(0);
-      dispatch(setCashIn({ par, count: balance }));
+    if (value > walletBalance) {
+      setCurrentWalletBalance(0);
+      dispatch(setCashIn({ par, count: walletBalance }));
       return;
     }
 
     if (value < 0) {
-      setCurrentBalance(balance);
+      setCurrentWalletBalance(walletBalance);
       dispatch(setCashIn({ par, count: 0 }));
       return;
     }
 
-    setCurrentBalance(balance - value);
+    setCurrentWalletBalance(walletBalance - value);
     dispatch(setCashIn({ par, count: value }));
   };
 
@@ -38,7 +38,7 @@ export const CashInControl = ({ name, par, balance }: TProps) => {
     const value = Number(e.target.value);
 
     if (isNaN(value)) {
-      checkCurrentCount(balance);
+      checkCurrentCount(0);
       return;
     }
 
@@ -46,20 +46,16 @@ export const CashInControl = ({ name, par, balance }: TProps) => {
   };
 
   const handleClickBtn = (type: 'inc' | 'dec') => {
-    if (type === 'inc' && cashInMoney[par] + 1 <= balance) {
+    if (type === 'inc' && cashInMoney[par] + 1 <= walletBalance) {
       dispatch(setCashIn({ par, count: cashInMoney[par] + 1 }));
-      setCurrentBalance((prev) => prev - 1);
+      setCurrentWalletBalance((prev) => prev - 1);
     }
 
     if (type === 'dec' && cashInMoney[par] - 1 >= 0) {
       dispatch(setCashIn({ par, count: cashInMoney[par] - 1 }));
-      setCurrentBalance((prev) => prev + 1);
+      setCurrentWalletBalance((prev) => prev + 1);
     }
   };
-
-  useLayoutEffect(() => {
-    checkCurrentCount(cashInMoney[par]);
-  }, [balance]);
 
   return (
     <Stack spacing={2}>
@@ -76,7 +72,7 @@ export const CashInControl = ({ name, par, balance }: TProps) => {
         />
         <Button onClick={() => handleClickBtn('inc')}>+</Button>
       </HStack>
-      <Text fontSize="sm">Доступно: {currentBalance}</Text>
+      <Text fontSize="sm">Доступно: {currentWalletBalance}</Text>
     </Stack>
   );
 };
