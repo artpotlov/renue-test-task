@@ -1,4 +1,4 @@
-import { TCashIn, TCatalogProduct, TMoney } from '../../../types/types';
+import { TCashIn, TCatalogProduct, TMoney } from '../../types/types';
 
 export type TVMachineState = {
   cashInTotal: number;

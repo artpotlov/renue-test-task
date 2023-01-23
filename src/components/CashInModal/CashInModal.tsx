@@ -16,11 +16,11 @@ import {
 } from '@chakra-ui/react';
 import CoinImage from '../../assets/coin.png';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { selectCashIn } from '../../store/slices/cashin/cashin.selector';
-import { selectWallet } from '../../store/slices/wallet/wallet.selector';
-import { cashInActions } from '../../store/slices/cashin/cashin.slice';
-import { vMachineActions } from '../../store/slices/vmachine/vmachine.slice';
-import { walletActions } from '../../store/slices/wallet/wallet.slice';
+import { selectCashIn } from '../../store/cashin/cashin.selector';
+import { cashInActions } from '../../store/cashin/cashin.slice';
+import { vMachineActions } from '../../store/vmachine/vmachine.slice';
+import { selectWallet } from '../../store/wallet/wallet.selector';
+import { walletActions } from '../../store/wallet/wallet.slice';
 import { CashInControl } from '../CashInControl';
 
 export const CashInModal = () => {
@@ -63,12 +63,12 @@ export const CashInModal = () => {
                 <Stack spacing={4}>
                   <HStack spacing={8}>
                     <Stack spacing={8}>
-                      <CashInControl name='Номинал 50' par='50' balance={wallet[50]} />
-                      <CashInControl name='Номинал 100' par='100' balance={wallet[100]} />
+                      <CashInControl name='Номинал 50' par='50' walletBalance={wallet[50]} />
+                      <CashInControl name='Номинал 100' par='100' walletBalance={wallet[100]} />
                     </Stack>
                     <Stack spacing={8}>
-                      <CashInControl name='Номинал 500' par='500' balance={wallet[500]} />
-                      <CashInControl name='Номинал 1000' par='1000' balance={wallet[1000]} />
+                      <CashInControl name='Номинал 500' par='500' walletBalance={wallet[500]} />
+                      <CashInControl name='Номинал 1000' par='1000' walletBalance={wallet[1000]} />
                     </Stack>
                   </HStack>
                   <Text mr={4} fontSize="lg" fontWeight="bold">

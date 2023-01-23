@@ -1,4 +1,4 @@
-import { TCashOut, TCatalogProduct } from '../../../types/types';
+import { TCashOut, TCatalogProduct } from '../../types/types';
 
 export type TCashOutState = {
   status: 'money' | 'products' | null;
@@ -15,3 +15,5 @@ export type TCashOutProductPayload = {
   total: number;
   cashOutProducts: TCatalogProduct[];
 };
+
+export type TKeysOfCashOutMoney = keyof TCashOut;

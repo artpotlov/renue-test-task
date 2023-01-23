@@ -1,8 +1,8 @@
 import { Box, Flex, Image, Stack, Text } from '@chakra-ui/react';
 import CoinImage from '../../assets/coin.png';
 import { useAppSelector } from '../../hooks/redux';
-import { selectCashOut } from '../../store/slices/cashout/cashout.selector';
-import { selectVMachine } from '../../store/slices/vmachine/vmachine.selector';
+import { selectCashOut } from '../../store/cashout/cashout.selector';
+import { selectVMachine } from '../../store/vmachine/vmachine.selector';
 
 export const CashOutMoney = () => {
   const { restMoney } = useAppSelector(selectCashOut);
